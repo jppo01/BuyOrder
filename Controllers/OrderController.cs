@@ -25,10 +25,38 @@ namespace BuyOrder.Controllers
             _orderService = orderService;
 
         }
-
         //GERAR PDF
+        //[Route("OrderReport")]
+        //[HttpGet("{id}")]
+        public IActionResult OrderReport(int? id)
+        {
+           /* if(id == null || _context.Orders == null)
+            {
+                return NotFound();
+            }*/
+            var wayReport = Path.Combine(_webHostEnv.WebRootPath, @"reports/ReportMVC.frx");
+            var reportFile = wayReport;
+                
+            var freport = new FastReport.Report();
+
+            var orderList = _orderService.GetOrders();
+
+            freport.Report.Load(reportFile);
+            freport.Dictionary.RegisterBusinessObject(orderList, "orderList", 10, true);
+            freport.Report.Save(reportFile);
+            freport.Prepare();
+
+            var pdfExport = new PDFSimpleExport();
+
+            using MemoryStream ms = new MemoryStream();
+            pdfExport.Export(freport, ms);
+            ms.Flush();
+
+            return File(ms.ToArray(), "application/pdf");  
+        }
         
-        [Route("OrderReport")]
+        /*
+        [Route("Order/CreateReport")]
         public IActionResult CreateReport(){
             var wayReport = Path.Combine(_webHostEnv.WebRootPath, @"reports/ReportMVC.frx");
             var reportFile = wayReport;
@@ -50,6 +78,8 @@ namespace BuyOrder.Controllers
 
         return File(ms.ToArray(), "application/pdf");                
         }
+        */
+
 
     
         // GET: Order

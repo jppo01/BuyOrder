@@ -4,12 +4,12 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Exclusão de Solicitação</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Tem certeza que deseja excluir essa solicitação? </h3>
+
 <div>
-    <h4>Order</h4>
-    <hr />
+    <h4>Solitação Nº @Html.DisplayFor(model => model.RequestId) </h4> 
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
@@ -69,7 +69,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="OrderId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Excluir" class="btn btn-danger"/> |
+        <a asp-action="Index">Voltar</a>
     </form>
 </div>

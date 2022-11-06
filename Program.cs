@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BuyOrder.Data;
 using BuyOrder.Services;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +37,15 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseFastReport();
+// Globalização para pt-BR
+var supportedCultures = new [] {new CultureInfo("pt-BR")};
+app.UseRequestLocalization (new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("pt-BR", "pt-BR"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures,
+});
 
 app.UseAuthentication();
 app.UseAuthorization();

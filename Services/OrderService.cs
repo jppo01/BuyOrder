@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BuyOrder.Models;
 using BuyOrder.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BuyOrder.Services
 {
@@ -20,5 +21,12 @@ namespace BuyOrder.Services
             var order = _context.Orders.ToList();
             return order;
         }
+        public Order GetOrderById(int id)
+        {
+            var order = _context.Orders.FirstOrDefault(o => o.OrderId == id);
+            return order;
+  
+        }
+
     }
 }
