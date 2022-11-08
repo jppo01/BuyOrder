@@ -1,0 +1,85 @@
+@model IEnumerable<BuyOrder.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Solicitações de Compra</h1>
+
+<p>
+    <a asp-action="Create">Nova Solicitação</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EquipamentModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EquipamentManufacture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequestId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsEmergency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OSNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrbisTag)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EquipamentModel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EquipamentManufacture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsEmergency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OSNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrbisTag)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                <a target= "oblink" asp-action="OrderReport" asp-route-id="@item.OrderId">PDF</a> |
+                <a asp-action="Edit" asp-route-id="@item.OrderId">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.OrderId">Ver</a> |
+                <a asp-action="Delete" asp-route-id="@item.OrderId">Excluir</a>
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
